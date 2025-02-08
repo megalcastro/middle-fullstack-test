@@ -13,6 +13,12 @@ export class ProductoRepository implements ProductoRepositoryPort {
     private readonly productoRepo: Repository<ProductoOrmEntity>,
   ) {}
 
+
+  async getAll(): Promise<Producto[]> {
+    const productosOrm = await this.productoRepo.find();
+    return productosOrm.map((productoOrm) => ProductoMapper.toDomain(productoOrm));
+  }
+
   async findBySku(sku: string): Promise<Producto | null> {
     const productoOrm = await this.productoRepo.findOne({ where: { sku } });
     return productoOrm ? ProductoMapper.toDomain(productoOrm) : null;

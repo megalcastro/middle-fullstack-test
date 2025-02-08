@@ -1,6 +1,7 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export class Producto {
     constructor(
-      public readonly id: string,
       public readonly nombre: string,
       public readonly sku: string,
       public precio: number,

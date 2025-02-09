@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ChakraProvider, Box, CSSReset } from '@chakra-ui/react';
 import Sidebar from './components/Sidebar';
 import ProductManagement from './pages/ProductManagement';
+import InventoryManagement from './pages/InventoryManagement';
+
 
 const App = () => {
   return (
@@ -14,6 +16,7 @@ const App = () => {
           <Box ml={{ base: 0, md: '250px' }} p={8} w="full">
             <Routes>
               <Route path="/productos" element={<ProductManagement />} />
+              <Route path="/inventario/movimientos" element={<InventoryManagement />} />
             </Routes>
           </Box>
         </Box>

@@ -25,6 +25,11 @@ const Sidebar = () => {
             <Text fontSize="lg" _hover={{ color: 'teal.500' }}>Gestionar Productos</Text>
           </Link>
         </VStack>
+        <VStack spacing={8} align="stretch">
+          <Link to="/inventario/movimientos">
+            <Text fontSize="lg" _hover={{ color: 'teal.500' }}>Gestionar movimientos</Text>
+          </Link>
+        </VStack>
       </Box>
 
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
@@ -38,6 +43,11 @@ const Sidebar = () => {
                   <Text fontSize="lg" _hover={{ color: 'teal.500' }}>Gestionar Productos</Text>
                 </Link>
               </VStack>
+              <VStack spacing={8} align="stretch">
+              <Link to="/inventario/movimientos">
+                <Text fontSize="lg" _hover={{ color: 'teal.500' }}>Gestionar movimientos</Text>
+              </Link>
+            </VStack>
             </DrawerBody>
           </DrawerContent>
         </DrawerOverlay>

@@ -12,7 +12,7 @@ const ProductForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Convertir los valores a números antes de validarlos
+
     const precioNumber = Number(precio);
     const stockNumber = Number(stock);
 
@@ -39,7 +39,6 @@ const ProductForm = () => {
         isClosable: true,
       });
 
-      // Resetear los campos después del envío
       setNombre('');
       setSku('');
       setPrecio('');

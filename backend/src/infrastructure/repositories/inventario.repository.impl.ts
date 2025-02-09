@@ -23,13 +23,11 @@ export class MovimientoInventarioRepository implements MovimientosInventarioRepo
   }
 
   async registrarMovimiento(movimiento: MovimientoInventario): Promise<void> {
-
     const productoOrm = await this.productoRepo.findOne({ where: { sku: movimiento.producto.sku } });
 
     if (!productoOrm) {
         throw new Error('Producto no encontrado');
     }
-
 
     const producto = new Producto(
         productoOrm.nombre,
@@ -38,32 +36,24 @@ export class MovimientoInventarioRepository implements MovimientosInventarioRepo
         productoOrm.stock,
     );
 
-
     if (movimiento.tipo === 'salida' && !producto.tieneStockSuficiente(movimiento.cantidad)) {
         throw new Error('Stock insuficiente para realizar la salida');
     }
 
-
     producto.actualizarStock(movimiento.tipo === 'entrada' ? movimiento.cantidad : -movimiento.cantidad);
-    
 
 
+    const movimientoOrm = MovimientoInventarioMapper.toOrmEntity(movimiento, productoOrm);
 
-
-
-
-
-
-
-    const movimientoOrm = MovimientoInventarioMapper.toOrmEntity(movimiento);
-
-
-    console.log(`Registrando movimiento de ${movimiento.tipo} de ${movimiento.cantidad} unidades de ${producto.nombre}`);
+    movimientoOrm.fecha = new Date();
+    console.log('Movimiento a guardar:', movimientoOrm);
     await this.movimientoRepo.save(movimientoOrm);
 
+    productoOrm.stock = producto.stock;
+    await this.productoRepo.save(productoOrm);
 
     if (producto.esStockCritico()) {
         console.log(`Alerta: El stock de ${producto.nombre} es crítico (5 o menos)`);
     }
-}  
+}
 }

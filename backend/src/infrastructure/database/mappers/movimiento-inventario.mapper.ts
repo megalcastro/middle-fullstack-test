@@ -4,15 +4,16 @@ import { Producto } from 'src/core/entities/producto.entity';
 import { ProductoOrmEntity } from '../entities/producto.orm-entity';
 
 export class MovimientoInventarioMapper {
-  static toOrmEntity(movimiento: MovimientoInventario): MovimientoInventarioOrmEntity {
+  static toOrmEntity(
+    movimiento: MovimientoInventario, 
+    productoOrm: ProductoOrmEntity
+  ): MovimientoInventarioOrmEntity {
     const movimientoOrm = new MovimientoInventarioOrmEntity();
     movimientoOrm.id = movimiento.id;
-
-    const productoOrm = new ProductoOrmEntity();
     movimientoOrm.producto = productoOrm;
     movimientoOrm.tipo = movimiento.tipo;
     movimientoOrm.cantidad = movimiento.cantidad;
-    movimientoOrm.fecha = movimiento.fecha;
+    movimientoOrm.fecha = movimiento.fecha ?? new Date();
 
     return movimientoOrm;
   }

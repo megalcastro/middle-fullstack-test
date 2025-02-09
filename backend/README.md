@@ -16,6 +16,15 @@ Asegúrate de tener instalados los siguientes requisitos:
 
 Para mayor facilidad y ejecuccion para non tener preocupacion al iniciar el proyecto.
 
+### 1. **Clonar el repositorio `.env`**:
+
+```bash
+git clone https://github.com/megalcastro/middle-fullstack-test
+
+cd backend
+
+```
+
 ### 1. **Crea un archivo `.env`**:
 
 Asegúrate de crear un archivo `.env` con la configuración de tu base de datos, por ejemplo:

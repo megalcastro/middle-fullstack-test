@@ -1,26 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Box, List, ListItem, Text } from '@chakra-ui/react';
-import { getProducts } from '../api/productApi';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../store/store'; 
+import { fetchProducts } from '../store/productSlice';
 
 const ProductList = () => {
-  const [products, setProducts] = useState<any[]>([]);
+  const dispatch = useDispatch<AppDispatch>();
+  
+  const { products, loading, error } = useSelector((state: RootState) => state.products);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const data = await getProducts();
-        setProducts(data);
-      } catch (error) {
-        alert('Error al obtener productos');
-      }
-    };
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
-    fetchProducts();
-  }, []);
+  if (loading) {
+    return <Text>Cargando...</Text>;
+  }
+
+  if (error) {
+    return <Text color="red.500">Error: {error}</Text>;
+  }
 
   return (
     <Box>
-      <Text fontSize="50px" mb={2} as='b'>Lista de Productos</Text>
+      <Text fontSize="50px" mb={2} as="b">Lista de Productos</Text>
       <List spacing={3}>
         {products.map((product) => (
           <ListItem key={product.id} border="1px" borderRadius="md" padding="3">

@@ -1,5 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ChakraProvider, Box, CSSReset } from '@chakra-ui/react';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
+
 import Sidebar from './components/Sidebar';
 import ProductManagement from './pages/ProductManagement';
 import InventoryManagement from './pages/InventoryManagement';
@@ -7,6 +10,7 @@ import InventoryManagement from './pages/InventoryManagement';
 
 const App = () => {
   return (
+    <Provider store={store}>
     <ChakraProvider>
       <CSSReset />
       <Router>
@@ -22,6 +26,7 @@ const App = () => {
         </Box>
       </Router>
     </ChakraProvider>
+    </Provider>
   );
 };
 

@@ -1,10 +1,11 @@
+import { Producto } from '../entities/producto.entity';
+
 export class MovimientoInventario {
-    constructor(
-      public readonly id: string,
-      public readonly productoId: string,
-      public readonly tipo: 'entrada' | 'salida',
-      public readonly cantidad: number,
-      public readonly fecha: Date,
-    ) {}
-  }
-  
+  constructor(
+    public id: string,
+    public producto: Producto,
+    public tipo: 'entrada' | 'salida',
+    public cantidad: number,
+    public fecha: Date,
+  ) {}
+}

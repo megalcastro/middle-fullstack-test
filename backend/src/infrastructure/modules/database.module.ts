@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ProductoOrmEntity } from '../database/entities/producto.orm-entity';
+import { MovimientoInventarioOrmEntity } from '../database/entities/movimiento-inventario.orm-entity';
 
 @Module({
   imports: [
@@ -15,7 +17,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        autoLoadEntities: true,
+        entities: [ProductoOrmEntity, MovimientoInventarioOrmEntity], 
         synchronize: true,
       }),
     }),

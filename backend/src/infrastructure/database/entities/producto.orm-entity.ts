@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { MovimientoInventarioOrmEntity } from './movimiento-inventario.orm-entity';
 
 @Entity('productos')
 export class ProductoOrmEntity {
@@ -16,4 +17,7 @@ export class ProductoOrmEntity {
 
   @Column('int')
   stock: number;
+
+  @OneToMany(() => MovimientoInventarioOrmEntity, (movimiento) => movimiento.producto)
+  movimientos: MovimientoInventarioOrmEntity[];
 }
